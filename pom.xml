@@ -8,12 +8,10 @@
     <artifactId>Secret_Game</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <natives.version>0.0.6</natives.version>
-        <lwjgl.version>2.8.2</lwjgl.version>
+        <lwjgl.version>2.9.1</lwjgl.version>
         <junit.version>4.10</junit.version>
     </properties>
 
