@@ -1,4 +1,4 @@
-package UI;
+package UI.Render;
 
 import CoreObjects.GameObject;
 import CoreObjects.Location;
@@ -26,14 +26,14 @@ public class LocationRenderer {
 
     private static void renderItself(final GameObject gameObject) {
         // set the color of the quad (R,G,B,A)
-        GL11.glColor3f(0.5f, 0.1f + colorcounter, 0.0f);
+        GL11.glColor3f(0.5f + colorcounter, 0.1f + colorcounter, 0.0f + colorcounter);
 
         // draw quad
         GL11.glBegin(GL11.GL_QUADS);
-        GL11.glVertex2f(100 + counter , 100);
-        GL11.glVertex2f(100 + counter + 200, 100);
-        GL11.glVertex2f(100 + counter + 200, 100 + 200);
-        GL11.glVertex2f(100 + counter, 100 + 200);
+        GL11.glVertex2f(100 + counter, 100 + counter);
+        GL11.glVertex2f(100 + counter + 200, 100 + counter);
+        GL11.glVertex2f(100 + counter + 200, 100 + 200 + counter);
+        GL11.glVertex2f(100 + counter, 100 + 200 + counter);
         GL11.glEnd();
     }
 }

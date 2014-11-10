@@ -1,21 +1,23 @@
 package CoreObjects;
 
-import UI.MapRenderer;
+import UI.Render.MapRenderer;
 import Units.Unit;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by yun on 11/8/14.
+ * The map of the level
+ *
+ * @author yun
  */
 public class LevelMap extends GameObject {
 
-    final Location[][] locations;
-    final List<Unit> units = new ArrayList();
+    final private List<Unit> units = new ArrayList();
+    final GridMap gridMap;
 
-    public LevelMap(final Location[][] locations) {
-        this.locations = locations;
+    public LevelMap(final GridMap gridMap) {
+        this.gridMap = gridMap;
     }
 
     public void render() {
@@ -24,12 +26,10 @@ public class LevelMap extends GameObject {
 
     @Override
     public List<GameObject> getChildren() {
-        final List<GameObject> childTiles = new ArrayList();
-        for (final Location[] locationColumn : locations) {
-            for (final Location location : locationColumn) {
-                childTiles.add(location);
-            }
-        }
-        return childTiles;
+        return gridMap.getLocationsAsList();
+    }
+
+    public GameObject getLocationObject(final int x, final int y) {
+        return this.gridMap.getLocation(x, y);
     }
 }

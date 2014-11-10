@@ -1,9 +1,6 @@
 package ScriptedLevels;
 
-import CoreObjects.LevelMap;
-import CoreObjects.Location;
-import CoreObjects.SquareTile;
-
+import CoreObjects.*;
 
 /**
  * Created by yun on 11/8/14.
@@ -11,17 +8,20 @@ import CoreObjects.SquareTile;
 public class Level1 {
 
     public static LevelMap init() {
-        final Location[][] locations = new Location[2][2];
-        final SquareTile tile1 = new SquareTile();
-        final SquareTile tile2 = new SquareTile();
-        final SquareTile tile3 = new SquareTile();
-        final SquareTile tile4 = new SquareTile();
-        locations[0][0] = tile1;
-        locations[1][0] = tile2;
-        locations[0][1] = tile3;
-        locations[1][1] = tile4;
+        final Location[][] locations = new Location[4][4];
+        final GridMap gridMap = new GridMap(locations);
 
-        return new LevelMap(locations);
+        // ST Coordinates
+        // (0,0) (1,0)
+        // (0,1) (1,1)
+
+        for (int i=0;i<4;i++){
+            for (int j=0;j<4;j++){
+                final SquareTile tile = new SquareTile(new Coordinate(i, j));
+                gridMap.addNewLocation(tile);
+            }
+        }
+        return new LevelMap(gridMap);
     }
 
 }

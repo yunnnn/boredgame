@@ -1,4 +1,4 @@
-package UI;
+package UI.Render;
 
 import CoreObjects.GameObject;
 import CoreObjects.LevelMap;

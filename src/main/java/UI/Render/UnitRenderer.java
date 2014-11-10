@@ -1,4 +1,4 @@
-package UI;
+package UI.Render;
 
 import CoreObjects.GameObject;
 import Units.Unit;
@@ -10,8 +10,8 @@ public class UnitRenderer {
 
     public static void render(final Unit unit) {
         renderItself(unit);
-       // for (final GameObject child : unit.getChildren()) {
-            //MoreRenderer.render(child);
+        // for (final GameObject child : unit.getChildren()) {
+        //MoreRenderer.render(child);
         //}
     }
 
