@@ -32,10 +32,21 @@ public abstract class Location extends GameObject {
         this.occupyingUnit = occupyingUnit;
     }
 
+    public boolean addUnit(final Unit unit) {
+        if (this.occupyingUnit != null){
+            return false;
+        }
+        this.occupyingUnit = unit;
+        unit.setLocation(this);
+        return true;
+    }
+
     @Override
     public List<GameObject> getChildren() {
         final List<GameObject> l = new ArrayList();
-        l.add(this.getOccupyingUnit());
+        if (this.occupyingUnit != null){
+            l.add(this.occupyingUnit);
+        }
         return l;
     }
 }

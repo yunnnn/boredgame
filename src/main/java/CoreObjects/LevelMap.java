@@ -20,10 +20,6 @@ public class LevelMap extends GameObject {
         this.gridMap = gridMap;
     }
 
-    public void render() {
-        MapRenderer.render(this);
-    }
-
     @Override
     public List<GameObject> getChildren() {
         return gridMap.getLocationsAsList();

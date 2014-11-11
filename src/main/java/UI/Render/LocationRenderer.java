@@ -1,39 +1,63 @@
 package UI.Render;
 
+import CoreObjects.Coordinate;
 import CoreObjects.GameObject;
+import CoreObjects.LevelMap;
 import CoreObjects.Location;
+import UI.Textures.GameImageUtils;
+import UI.Textures.GamePanel;
+import UI.Textures.Layer;
 import Units.Unit;
-import org.lwjgl.opengl.GL11;
+
+import javax.swing.*;
 
 /**
  * Created by yun on 11/8/14.
  */
-public class LocationRenderer {
+public class LocationRenderer extends Renderer {
 
-    static int counter = 0;
-    static float colorcounter = 0;
-
-    public static void render(final Location location) {
-
-        counter += 30;
-        colorcounter += .2f;
-        renderItself(location);
-
-        for (final GameObject child : location.getChildren()) {
-            UnitRenderer.render((Unit) child);
-        }
+    final Location l;
+    public LocationRenderer(final Location location){
+        this.l = location;
     }
 
-    private static void renderItself(final GameObject gameObject) {
-        // set the color of the quad (R,G,B,A)
-        GL11.glColor3f(0.5f + colorcounter, 0.1f + colorcounter, 0.0f + colorcounter);
+    public void render() {
+        renderItself();
 
-        // draw quad
-        GL11.glBegin(GL11.GL_QUADS);
-        GL11.glVertex2f(100 + counter, 100 + counter);
-        GL11.glVertex2f(100 + counter + 200, 100 + counter);
-        GL11.glVertex2f(100 + counter + 200, 100 + 200 + counter);
-        GL11.glVertex2f(100 + counter, 100 + 200 + counter);
-        GL11.glEnd();
+//        for (final GameObject child : l.getChildren()) {
+//            new UnitRenderer((Unit) child).render();
+//        }
+    }
+
+    void renderItself() {
+        //load an image into the layeredPane at {x,y}
+        final Coordinate coords = l.getCoords();
+
+        final int xEdgeSpacing = 135;
+        final int yEdgeSpacing = 52;
+
+        final int offset = 10;
+        final int locationSize = GameImageUtils.LOCATION_IMAGE.getIconWidth();
+        int x = coords.getX() * (locationSize + offset) + xEdgeSpacing;
+        int y = coords.getY() * (locationSize + offset) + yEdgeSpacing;
+
+        Integer depth = Layer.LOCATION.getValue();
+
+        GamePanel.get().loadImage(GameImageUtils.LOCATION_IMAGE, depth, x, y);
+
+        if (this.l.hasOccupyingUnit()){
+            depth = Layer.UNIT.getValue();
+            final String unitName = l.getOccupyingUnit().getClass().getSimpleName();
+            ImageIcon image = null;
+            if (unitName.equals("Swordsman")){
+                image = GameImageUtils.SWORDSMAN_IMAGE;
+            } else if (unitName.equals("Overlord")){
+                image = GameImageUtils.OVERLORD_IMAGE;
+            }
+            x += 10; //character offset
+            y += 10;
+
+            GamePanel.get().loadImage(image, depth, x, y);
+        }
     }
 }
