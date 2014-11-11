@@ -1,8 +1,8 @@
 package UI.Textures;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -11,19 +11,27 @@ import java.io.IOException;
  */
 public final class GameImageUtils {
 
-    public static final ImageIcon LOCATION_IMAGE = scale("images/grass.jpg", 100, 100);
-    public static final ImageIcon OVERLORD_IMAGE = scale("images/laharl.png", 80, 80);
-    public static final ImageIcon SWORDSMAN_IMAGE = scale("images/link.png", 80, 80);
-    public static final ImageIcon BG_IMAGE = scale("images/bg.jpg", 800, 600);
-    public static final ImageIcon MAP_IMAGE = scale("images/lightbg.jpg", 500, 500);
+    public static final Image MAP_IMAGE = read("images/lightbg.jpg");
+    public static final Image LOCATION_IMAGE = scaleRead("images/grass.jpg", 125, 125);
+    public static final Image OVERLORD_IMAGE = scaleRead("images/laharl.png", 100, 100);
+    public static final Image SWORDSMAN_IMAGE = scaleRead("images/link.png", 100, 100);
+    public static final Image BG_IMAGE = scaleRead("images/bg.jpg", 800, 600);
+    public static final Image DRAGON_IMAGE = scaleRead("images/dragon.png", 125, 125);
 
-
-    private static ImageIcon scale(final String source, final int x, final int y) {
+    private static Image read(final String source) {
         try {
-            Image image = ImageIO.read(new File(source));
-            final Image scaledImage = image.getScaledInstance(x, y, java.awt.Image.SCALE_SMOOTH);
-            return new ImageIcon(scaledImage, source);
-        } catch (IOException e) {
+            return ImageIO.read(new File(source));
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static Image scaleRead(final String source, final int x, final int y) {
+        try {
+            final BufferedImage image = ImageIO.read(new File(source));
+            return image.getScaledInstance(x, y, Image.SCALE_SMOOTH);
+        } catch (final IOException e) {
             e.printStackTrace();
         }
         return null;

@@ -1,6 +1,5 @@
 package CoreObjects;
 
-import UI.Render.MapRenderer;
 import Units.Unit;
 
 import java.util.ArrayList;

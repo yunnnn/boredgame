@@ -1,5 +1,8 @@
 package UI.Textures;
 
+import CoreObjects.LevelMap;
+import UI.Render.MapPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,6 +16,7 @@ public class GamePanel extends JPanel {
         return gamePanel;
     }
 
+    private MapPanel mapPanel;
     private JLayeredPane layeredPane;
 
     private GamePanel(final int screenWidth, final int screenHeight) {
@@ -20,11 +24,16 @@ public class GamePanel extends JPanel {
         //create LayeredPane
         this.layeredPane = new JLayeredPane();
         this.layeredPane.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.add(layeredPane);
+        this.add(this.layeredPane);
 
         //Load the static BG and Menu
         loadMenu();
-        loadBackground(GameImageUtils.BG_IMAGE, Layer.BACKGROUND.getValue());
+    }
+
+    @Override
+    protected void paintComponent(final Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(GameImageUtils.BG_IMAGE, 0, 0, null);
     }
 
     //Create the main JFrame, and attach the GamePanel to it.
@@ -35,14 +44,8 @@ public class GamePanel extends JPanel {
         f.setSize(screenWidth, screenHeight);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        GamePanel.gamePanel = new GamePanel(screenWidth, screenHeight);
+        gamePanel = new GamePanel(screenWidth, screenHeight);
         f.add(gamePanel);
-    }
-
-    //load an image into the layeredPane
-    public void loadBackground(final ImageIcon image, final Integer depth) {
-        final ImageIcon scaledImage = new ImageIcon(image.getImage().getScaledInstance(800, 600, 0));
-        loadImage(scaledImage, depth, 0, 0);
     }
 
     //load an image into the layeredPane
@@ -65,6 +68,15 @@ public class GamePanel extends JPanel {
         this.layeredPane.add(imageContainer, depth);
     }
 
+    //load an image into the layeredPane at {x,y}
+    public void loadPanel(final JPanel panel,
+                          final Integer depth,
+                          final int x,
+                          final int y) {
+        logLoad(panel.getName(), x, y, panel.getSize(), depth);
+        this.layeredPane.add(panel, depth);
+    }
+
     //logging
     public void logLoad(final String imageName,
                         final int x,
@@ -77,5 +89,12 @@ public class GamePanel extends JPanel {
         sb.append("Width:" + size.getWidth() + " Height:" + size.getHeight() + " ");
         sb.append("Depth: " + depth + ". ");
         System.out.println(sb.toString());
+    }
+
+    public void renderChildren(final LevelMap map) {
+        final MapPanel mapPanel = new MapPanel(map);
+        gamePanel.loadPanel(mapPanel, Layer.MAP.getValue(), 0, 0);
+        mapPanel.renderChildren();
+        this.mapPanel = mapPanel;
     }
 }

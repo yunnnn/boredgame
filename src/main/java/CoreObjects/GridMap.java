@@ -32,6 +32,7 @@ public class GridMap {
         return true;
     }
 
+    //Warning: this method may return a List that contains null objects
     public List<GameObject> getLocationsAsList() {
         final List<GameObject> childLocations = new ArrayList();
         for (final Location[] locationColumn : this.locations) {

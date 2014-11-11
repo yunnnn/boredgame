@@ -33,7 +33,7 @@ public abstract class Location extends GameObject {
     }
 
     public boolean addUnit(final Unit unit) {
-        if (this.occupyingUnit != null){
+        if (this.occupyingUnit != null) {
             return false;
         }
         this.occupyingUnit = unit;
@@ -44,7 +44,7 @@ public abstract class Location extends GameObject {
     @Override
     public List<GameObject> getChildren() {
         final List<GameObject> l = new ArrayList();
-        if (this.occupyingUnit != null){
+        if (this.occupyingUnit != null) {
             l.add(this.occupyingUnit);
         }
         return l;

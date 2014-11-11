@@ -1,9 +1,14 @@
 V0.1 11/10/15: Switched to Jpanels, have basic BG/Map/Location/Unit showing.
+V0.2 11/10/15: Switched to nested Panels, allowing keyboard listener and highlighting to work.
+
+
 
 Todos:
+The unitPanel code doesn't seem to work. either it shows and isnt transparent, or doesn't show at all.
+Right now I have the Units coded into the Location.
+
 Add keyboard listener
 Add highlighting to cells
-Make the Locations less hardcoded, maybe put them in a panel?
 Add action - response loop to move units
 
 

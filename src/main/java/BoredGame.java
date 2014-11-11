@@ -1,6 +1,5 @@
 import CoreObjects.LevelMap;
 import ScriptedLevels.Level1;
-import UI.Render.MapRenderer;
 import UI.Textures.GamePanel;
 
 /**
@@ -12,11 +11,10 @@ public class BoredGame {
     private static int SCREEN_HEIGHT = 600;
 
     public static void main(String[] argv) {
-        GamePanel.init(SCREEN_WIDTH, SCREEN_HEIGHT);
+        GamePanel.init(SCREEN_WIDTH, SCREEN_HEIGHT); //create jframe
+        final LevelMap map = Level1.init(); //load the hardcoded map
+        GamePanel.get().renderChildren(map); //load child ui
 
-        final LevelMap map = Level1.init();
-        new MapRenderer(map).render();
-
-        GamePanel.get().revalidate();
+        GamePanel.get().revalidate(); //build the ui
     }
 }

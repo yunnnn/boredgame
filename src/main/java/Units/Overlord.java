@@ -1,7 +1,5 @@
 package Units;
 
-import CoreObjects.Location;
-
 /**
  * Created by yun on 11/10/14.
  */
