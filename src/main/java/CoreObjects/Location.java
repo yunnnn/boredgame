@@ -25,7 +25,7 @@ public abstract class Location extends GameObject {
     }
 
     public Unit getOccupyingUnit() {
-        return occupyingUnit;
+        return this.occupyingUnit;
     }
 
     public void setOccupyingUnit(final Unit occupyingUnit) {
@@ -39,14 +39,5 @@ public abstract class Location extends GameObject {
         this.occupyingUnit = unit;
         unit.setLocation(this);
         return true;
-    }
-
-    @Override
-    public List<GameObject> getChildren() {
-        final List<GameObject> l = new ArrayList();
-        if (this.occupyingUnit != null) {
-            l.add(this.occupyingUnit);
-        }
-        return l;
     }
 }

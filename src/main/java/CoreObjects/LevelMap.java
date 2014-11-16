@@ -19,9 +19,8 @@ public class LevelMap extends GameObject {
         this.gridMap = gridMap;
     }
 
-    @Override
-    public List<GameObject> getChildren() {
-        return gridMap.getLocationsAsList();
+    public List<GameObject> getLocations() {
+        return this.gridMap.getLocationsAsList();
     }
 
     public GameObject getLocationObject(final int x, final int y) {

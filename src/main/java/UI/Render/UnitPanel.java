@@ -55,9 +55,6 @@ public class UnitPanel extends JPanel {
     }
 
     public void renderChildren() {
-        for (final GameObject child : this.unit.getChildren()) {
-            //MoreRenderer.renderChildren(child);
-        }
     }
 
 }

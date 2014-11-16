@@ -26,27 +26,30 @@ public class LocationPanel extends JPanel {
         this.add(label);
     }
 
+    public Location getLoc(){
+        return this.location;
+    }
+
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         g.drawImage(GameImageUtils.LOCATION_IMAGE, 0, 0, null);
 
-        //hard code the children into the Locationpanel,
+        // hard code the children into the Locationpanel,
         // because I can't get it to work in the UnitPanel
-        for (final GameObject child : this.location.getChildren()) {
-            if (child != null) {
-                final String unitName = ((Unit) child).getClass().getSimpleName();
-                final int locationOffset = 12; //character offset
-                Image image = null;
-                if (unitName.equals("Swordsman")) {
-                    image = GameImageUtils.SWORDSMAN_IMAGE;
-                } else if (unitName.equals("Overlord")) {
-                    image = GameImageUtils.OVERLORD_IMAGE;
-                } else {
-                    image = GameImageUtils.DRAGON_IMAGE;
-                }
-                g.drawImage(image, locationOffset, locationOffset, null);
+        final Unit unit = this.location.getOccupyingUnit();
+        if (unit != null) {
+            final String unitName = unit.getClass().getSimpleName();
+            final int locationOffset = 12; //character offset
+            Image image = null;
+            if (unitName.equals("Swordsman")) {
+                image = GameImageUtils.SWORDSMAN_IMAGE;
+            } else if (unitName.equals("Overlord")) {
+                image = GameImageUtils.OVERLORD_IMAGE;
+            } else {
+                image = GameImageUtils.DRAGON_IMAGE;
             }
+            g.drawImage(image, locationOffset, locationOffset, null);
         }
     }
 

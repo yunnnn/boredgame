@@ -1,6 +1,7 @@
 package UI.Textures;
 
 import CoreObjects.LevelMap;
+import UI.Render.KeyboardListener;
 import UI.Render.MapPanel;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ import java.awt.*;
 public class GamePanel extends JPanel {
 
     private static GamePanel gamePanel; //Singleton
+
     public static GamePanel get() {
         return gamePanel;
     }
@@ -46,6 +48,7 @@ public class GamePanel extends JPanel {
 
         gamePanel = new GamePanel(screenWidth, screenHeight);
         f.add(gamePanel);
+        f.addKeyListener(new KeyboardListener()); //gamePanel is both a listener
     }
 
     //load an image into the layeredPane
@@ -96,5 +99,9 @@ public class GamePanel extends JPanel {
         gamePanel.loadPanel(mapPanel, Layer.MAP.getValue(), 0, 0);
         mapPanel.renderChildren();
         this.mapPanel = mapPanel;
+    }
+
+    public MapPanel getMapPanel() {
+        return this.mapPanel;
     }
 }

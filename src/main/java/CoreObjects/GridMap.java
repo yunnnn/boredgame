@@ -18,6 +18,18 @@ public class GridMap {
         this.locations = locations;
     }
 
+    private Location[][] flipLocations(final Location[][] locations) {
+        final int rows = locations.length;
+        final int columns = locations[0].length;
+        final Location[][] flippedLocations = new Location[rows][columns];
+        for(int i = 0; i < columns; i++){
+            for(int j = 0; j < rows; j++){
+                flippedLocations[i][j] = locations[j][i];
+            }
+        }
+        return flippedLocations;
+    }
+
     public GameObject getLocation(final int x, final int y) {
         return this.locations[x][y];
     }
@@ -34,8 +46,8 @@ public class GridMap {
 
     //Warning: this method may return a List that contains null objects
     public List<GameObject> getLocationsAsList() {
-        final List<GameObject> childLocations = new ArrayList();
-        for (final Location[] locationColumn : this.locations) {
+        final List<GameObject> childLocations = new ArrayList<GameObject>();
+        for (final Location[] locationColumn : flipLocations(this.locations)) {
             for (final Location location : locationColumn) {
                 childLocations.add(location);
             }

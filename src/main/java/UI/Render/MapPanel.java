@@ -1,5 +1,6 @@
 package UI.Render;
 
+import CoreObjects.Coordinate;
 import CoreObjects.GameObject;
 import CoreObjects.LevelMap;
 import CoreObjects.Location;
@@ -34,7 +35,7 @@ public final class MapPanel extends JPanel {
     }
 
     public void renderChildren() {
-        for (final GameObject child : this.map.getChildren()) {
+        for (final GameObject child : this.map.getLocations()) {
             if (child == null) {
                 this.add(new JLabel(""));
             } else {
@@ -45,5 +46,15 @@ public final class MapPanel extends JPanel {
                 locationPanel.renderChildren();
             }
         }
+    }
+
+    public LocationPanel getLocationPanel(final int x, final int y){
+        for (final LocationPanel child : this.locationPanels) {
+            final Coordinate coords = child.getLoc().getCoords();
+            if (coords.getX() == x && coords.getY() == y){
+                return child;
+            }
+        }
+        return null;
     }
 }
