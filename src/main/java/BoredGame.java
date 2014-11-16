@@ -1,8 +1,9 @@
+import CoreObjects.Coordinate;
 import CoreObjects.LevelMap;
 import GameState.GameState;
 import ScriptedLevels.Level1;
-import UI.Render.LocationPanel;
-import UI.Textures.GamePanel;
+import UI.LocationPanel;
+import UI.GamePanel;
 
 /**
  * Created by yun on 11/8/14.
@@ -15,14 +16,17 @@ public class BoredGame {
     private static boolean gameOver = false;
 
     public static void main(String[] argv) {
-        GamePanel.init(SCREEN_WIDTH, SCREEN_HEIGHT); //create jframe
+        System.out.println("Loading LevelMap... Size: " + Level1.cols  + "," + Level1.rows);
         final LevelMap map = Level1.init(); //load the hardcoded map
+
+        System.out.println("Loading UI elements...");
+        GamePanel.init(SCREEN_WIDTH, SCREEN_HEIGHT); //create jframe
         GamePanel.get().renderChildren(map); //load child ui
         GamePanel.get().revalidate(); //build the ui
 
-        final LocationPanel startLocation = GamePanel.get().getMapPanel().getLocationPanel(0, 0);
-        GameState.setCurrentLocation(startLocation);
+        GameState.get().setCurrentLocationFocus(new Coordinate(0, 0));
 
+        System.out.println("Starting game...");
         execute(); //start the game
     }
 

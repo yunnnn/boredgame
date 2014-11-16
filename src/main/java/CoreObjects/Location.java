@@ -2,9 +2,6 @@ package CoreObjects;
 
 import Units.Unit;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by yun on 11/8/14.
  */

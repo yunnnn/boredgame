@@ -19,12 +19,16 @@ public class GridMap {
     }
 
     private Location[][] flipLocations(final Location[][] locations) {
-        final int rows = locations.length;
         final int columns = locations[0].length;
-        final Location[][] flippedLocations = new Location[rows][columns];
+        final int rows = locations.length;
+        //System.out.println("New Cols: " + columns);
+        //System.out.println("New Rows: " + rows);
+        final Location[][] flippedLocations = new Location[columns][rows];
         for(int i = 0; i < columns; i++){
             for(int j = 0; j < rows; j++){
-                flippedLocations[i][j] = locations[j][i];
+                if (locations[j][i] != null){
+                    flippedLocations[i][j] = locations[j][i];
+                }
             }
         }
         return flippedLocations;

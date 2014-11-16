@@ -1,9 +1,10 @@
-package UI.Render;
+package UI.Utils;
 
 import CoreObjects.Coordinate;
 import CoreObjects.Direction;
 import GameState.GameState;
-import UI.Textures.GamePanel;
+import UI.GamePanel;
+import UI.LocationPanel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -25,11 +26,11 @@ public class KeyboardListener implements KeyListener{
 
     @Override
     public void keyTyped(final KeyEvent e) {
-        processAction(e.getKeyChar());
     }
 
     @Override
     public void keyPressed(final KeyEvent e) {
+        processAction(e.getKeyCode());
     }
 
     @Override
@@ -37,24 +38,32 @@ public class KeyboardListener implements KeyListener{
     }
 
 
-    private void processAction(final char c) {
+    private void processAction(final int keyCode) {
         LocationPanel highlightTarget = null;
-        switch (c){
-            case 'w':
+        switch (keyCode){
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 highlightTarget = getAdjacent(Direction.UP);
                 break;
-            case 'a':
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 highlightTarget = getAdjacent(Direction.LEFT);
                 break;
-            case 's':
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 highlightTarget = getAdjacent(Direction.DOWN);
                 break;
-            case 'd':
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 highlightTarget = getAdjacent(Direction.RIGHT);
                 break;
-            case '\n':
+            case KeyEvent.VK_SPACE:
+            case KeyEvent.VK_ENTER:
+                System.out.println("Submit request.");
                 processSubmit();
                 return;
+            default:
+                System.out.println("Pressed Non-action: " + keyCode);
         }
         highlight(highlightTarget);
     }
@@ -67,39 +76,20 @@ public class KeyboardListener implements KeyListener{
         if (jPanel != null) {
             unHighlight();
             jPanel.setBorder(HIGHLIGHTED_BORDER);
-            GameState.setCurrentLocation(jPanel);
+            GameState.get().setCurrentLocationFocus(jPanel.getCoords());
         }
     }
 
     private void unHighlight() {
-        if (GameState.getCurrentLocation() != null) {
-            GameState.setCurrentLocationBorder(EMPTY_BORDER);
+        if (GameState.get().getCurrentLocationFocus() != null) {
+            GameState.get().setCurrentLocationBorder(EMPTY_BORDER);
         }
     }
 
-    //todo: refactor this into a better location/static util method
     private LocationPanel getAdjacent(final Direction direction) {
-        final Coordinate coords = GameState.getCurrentLocationCoords();
-        int x = coords.getX();
-        int y = coords.getY();
-        switch (direction){
-            case UP:
-                y -= 1;
-                break;
-            case DOWN:
-                y += 1;
-                break;
-            case LEFT:
-                x -= 1;
-                break;
-            case RIGHT:
-                x += 1;
-                break;
-        }
-        return getLocationPanel(x, y);
-    }
-    private LocationPanel getLocationPanel(final int x, final int y){
-        return GamePanel.get().getMapPanel().getLocationPanel(x, y);
+        final Coordinate coords = GameState.get().getCurrentLocationFocus();
+        final Coordinate adjacentCoords = Coordinate.getAdjacent(coords, direction);
+        return GamePanel.get().getMapPanel().getLocationPanel(adjacentCoords);
     }
 
 }

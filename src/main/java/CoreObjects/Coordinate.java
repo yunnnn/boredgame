@@ -20,4 +20,24 @@ public class Coordinate {
     public int getY() {
         return y;
     }
+
+    public static Coordinate getAdjacent(final Coordinate coords, final Direction direction) {
+        int x = coords.getX();
+        int y = coords.getY();
+        switch (direction){
+            case UP:
+                y -= 1;
+                break;
+            case DOWN:
+                y += 1;
+                break;
+            case LEFT:
+                x -= 1;
+                break;
+            case RIGHT:
+                x += 1;
+                break;
+        }
+        return new Coordinate(x, y);
+    }
 }

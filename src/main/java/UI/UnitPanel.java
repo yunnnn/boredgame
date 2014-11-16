@@ -1,12 +1,10 @@
-package UI.Render;
+package UI;
 
-import CoreObjects.GameObject;
-import UI.Textures.GameImageUtils;
+import UI.Utils.GameImageUtils;
 import Units.Unit;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by yun on 11/8/14.

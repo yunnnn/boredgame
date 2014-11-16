@@ -1,10 +1,8 @@
-package UI.Render;
+package UI;
 
 import CoreObjects.Coordinate;
-import CoreObjects.GameObject;
 import CoreObjects.Location;
-import UI.Textures.GameImageUtils;
-import UI.Textures.Layer;
+import UI.Utils.GameImageUtils;
 import Units.Unit;
 
 import javax.swing.*;
@@ -30,6 +28,10 @@ public class LocationPanel extends JPanel {
         return this.location;
     }
 
+    public Coordinate getCoords(){
+        return this.location.getCoords();
+    }
+
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
@@ -40,8 +42,8 @@ public class LocationPanel extends JPanel {
         final Unit unit = this.location.getOccupyingUnit();
         if (unit != null) {
             final String unitName = unit.getClass().getSimpleName();
-            final int locationOffset = 12; //character offset
-            Image image = null;
+            final int locationOffset = 10; //character offset
+            final Image image;
             if (unitName.equals("Swordsman")) {
                 image = GameImageUtils.SWORDSMAN_IMAGE;
             } else if (unitName.equals("Overlord")) {
@@ -49,7 +51,9 @@ public class LocationPanel extends JPanel {
             } else {
                 image = GameImageUtils.DRAGON_IMAGE;
             }
-            g.drawImage(image, locationOffset, locationOffset, null);
+            int w = this.getWidth();
+            int h = this.getHeight();
+            g.drawImage(image, locationOffset, locationOffset, w-2*locationOffset, h-2*locationOffset, null);
         }
     }
 

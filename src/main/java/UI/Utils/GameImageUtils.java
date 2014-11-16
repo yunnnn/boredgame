@@ -1,4 +1,4 @@
-package UI.Textures;
+package UI.Utils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

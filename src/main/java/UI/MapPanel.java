@@ -1,10 +1,11 @@
-package UI.Render;
+package UI;
 
 import CoreObjects.Coordinate;
 import CoreObjects.GameObject;
 import CoreObjects.LevelMap;
 import CoreObjects.Location;
-import UI.Textures.GameImageUtils;
+import ScriptedLevels.Level1;
+import UI.Utils.GameImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +25,7 @@ public final class MapPanel extends JPanel {
         super();
         this.map = map;
         this.setBounds(100, 35, 500, 500);
-        this.gridLayout = new GridLayout(4, 4, 0, 0);
+        this.gridLayout = new GridLayout(Level1.rows, Level1.cols, 0, 0);
         this.setLayout(this.gridLayout);
     }
 
@@ -40,12 +41,15 @@ public final class MapPanel extends JPanel {
                 this.add(new JLabel(""));
             } else {
                 final LocationPanel locationPanel = new LocationPanel((Location) child);
-                locationPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 this.add(locationPanel);
                 this.locationPanels.add(locationPanel);
                 locationPanel.renderChildren();
             }
         }
+    }
+
+    public LocationPanel getLocationPanel(final Coordinate coords){
+        return getLocationPanel(coords.getX(), coords.getY());
     }
 
     public LocationPanel getLocationPanel(final int x, final int y){

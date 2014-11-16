@@ -1,4 +1,4 @@
-package UI.Textures;
+package UI.Utils;
 
 /**
  * Created by yun on 11/10/14.
