@@ -5,6 +5,7 @@ import Game.CoreObjects.LevelMap;
 import Game.GameState.GameState;
 import Game.ScriptedLevels.Level1;
 import Game.UI.GamePanel;
+import Game.UI.UnitPanel;
 import Game.UI.Utils.ImageProperties;
 
 /**
@@ -30,6 +31,7 @@ public class BoredGame {
     }
 
     private static void execute() {
+
         //todo: add more stuff?
         GameState.get().startTurn();
 

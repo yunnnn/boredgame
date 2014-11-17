@@ -1,10 +1,12 @@
 package Game.UI.Utils;
 
+import Game.BoredGame;
 import Game.CoreObjects.Coordinate;
 import Game.CoreObjects.Direction;
 import Game.GameState.GameState;
 import Game.UI.GamePanel;
 import Game.UI.LocationPanel;
+import Game.UI.UnitPanel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -42,34 +44,49 @@ public class KeyboardListener implements KeyListener {
         switch (keyCode) {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
-                highlightTarget = getAdjacent(Direction.UP);
+                highlightTarget = getAdjacentPanel(Direction.UP);
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
-                highlightTarget = getAdjacent(Direction.LEFT);
+                highlightTarget = getAdjacentPanel(Direction.LEFT);
                 break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S:
-                highlightTarget = getAdjacent(Direction.DOWN);
+                highlightTarget = getAdjacentPanel(Direction.DOWN);
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
-                highlightTarget = getAdjacent(Direction.RIGHT);
+                highlightTarget = getAdjacentPanel(Direction.RIGHT);
                 break;
             case KeyEvent.VK_SPACE:
+                System.out.println("Space request.");
+                processSpace();
+                return;
             case KeyEvent.VK_ENTER:
                 System.out.println("Submit request.");
                 processSubmit();
                 return;
+            case KeyEvent.VK_Z:
+                System.out.println("Repainting Page...");
+                for (final LocationPanel lp: GamePanel.get().getGridPanel().getLocationPanels()){
+                    lp.repaint();
+                }
             default:
                 System.out.println("Pressed Non-action: " + keyCode);
         }
         highlight(highlightTarget);
     }
 
+    //test code
+    public static UnitPanel testPanel;
+    public static boolean hideUnitPanel = false;
     private void processSubmit() {
-        //todo: do something here
-        return;
+        hideUnitPanel = true;
+        testPanel.repaint();
+    }
+    private void processSpace() {
+        hideUnitPanel = false;
+        testPanel.repaint();
     }
 
     //create a border around the panel to indicate that it is highlighted
@@ -88,7 +105,7 @@ public class KeyboardListener implements KeyListener {
         }
     }
 
-    private LocationPanel getAdjacent(final Direction direction) {
+    private LocationPanel getAdjacentPanel(final Direction direction) {
         final Coordinate coords = GameState.get().getCurrentLocationFocus();
         final Coordinate adjacentCoords = Coordinate.getAdjacent(coords, direction);
         return GamePanel.get().getLocationPanel(adjacentCoords);

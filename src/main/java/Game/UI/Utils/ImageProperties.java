@@ -26,11 +26,14 @@ public final class ImageProperties {
     public static final int LOC_HEIGHT = (MAP_WIDTH - GRID_OFFSET * 2) / Level1.rows;
     public static final int LOC_WIDTH = (MAP_WIDTH - GRID_OFFSET * 2) / Level1.cols;
 
+    public static final int UNIT_WIDTH = LOC_WIDTH;
+    public static final int UNIT_HEIGHT = LOC_HEIGHT;
+
     public static final Image MAP_IMAGE = scaleRead("images/lightbg.jpg", MAP_WIDTH, MAP_HEIGHT);
     public static final Image NO_LOCATION_BG = scaleRead("images/lightbg.jpg", LOC_WIDTH, LOC_HEIGHT);
     public static final Image LOCATION_BG = scaleRead("images/grass.jpg", LOC_WIDTH, LOC_HEIGHT);
-    public static final Image OVERLORD_IMAGE = read("images/laharl.png");
-    public static final Image SWORDSMAN_IMAGE = read("images/link.png");
+    public static final Image OVERLORD_IMAGE = scaleRead("images/laharl.png", UNIT_WIDTH, UNIT_HEIGHT);
+    public static final Image SWORDSMAN_IMAGE = scaleRead("images/link.png", UNIT_WIDTH, UNIT_HEIGHT);
     public static final Image BG_IMAGE = scaleRead("images/bg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT);
     public static final Image DRAGON_IMAGE = read("images/dragon.png");
 

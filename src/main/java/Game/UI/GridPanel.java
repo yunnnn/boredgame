@@ -47,6 +47,10 @@ public final class GridPanel extends JPanel {
         }
     }
 
+    public List<LocationPanel> getLocationPanels() {
+        return this.locationPanels;
+    }
+
     public LocationPanel getLocationPanel(final Coordinate coords) {
         return getLocationPanel(coords.getX(), coords.getY());
     }

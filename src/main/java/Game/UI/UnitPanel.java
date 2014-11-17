@@ -1,55 +1,61 @@
 package Game.UI;
 
+import Game.BoredGame;
 import Game.UI.Utils.ImageProperties;
+import Game.UI.Utils.KeyboardListener;
 import Game.Units.Unit;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 
 /**
  * Created by yun on 11/8/14.
  */
 public class UnitPanel extends JPanel {
 
-    final Unit unit;
+    private Unit unit;
 
     public UnitPanel(final Unit unit) {
+        super();
+
+        KeyboardListener.testPanel = this;
+
         this.unit = unit;
-        this.setBounds(0, 0, 100, 100);
-
-//        final String unitName = this.unit.getClass().getSimpleName();
-//        final int locationOffset = 12; //character offset
-//        Image image;
-//        if (unitName.equals("Swordsman")) {
-//            image = GameImageUtils.SWORDSMAN_IMAGE;
-//        } else if (unitName.equals("Overlord")) {
-//            image = GameImageUtils.OVERLORD_IMAGE;
-//        } else {
-//            image = GameImageUtils.DRAGON_IMAGE;
-//        }
-//
-//        ImageIcon imageIcon = new ImageIcon(image);
-//        final JLabel jLabel = new JLabel(imageIcon);
-
+        this.setOpaque(false);
+        this.setBounds(0, 0, ImageProperties.LOC_WIDTH, ImageProperties.LOC_HEIGHT);
     }
 
     @Override
     protected void paintComponent(final Graphics g) {
-        super.paintComponent(g);
-        final String unitName = this.unit.getClass().getSimpleName();
-        final int locationOffset = 12; //character offset
-        Image image = null;
-        if (unitName.equals("Swordsman")) {
-            image = ImageProperties.SWORDSMAN_IMAGE;
-        } else if (unitName.equals("Overlord")) {
-            image = ImageProperties.OVERLORD_IMAGE;
-        } else {
-            image = ImageProperties.DRAGON_IMAGE;
+        if (KeyboardListener.hideUnitPanel || this.unit == null){
+            //test code to hide units
+            return;
         }
-        g.drawImage(image, locationOffset, locationOffset, null);
+
+        final String unitName = this.unit.getClass().getSimpleName();
+        final Image image;
+        switch (unitName) {
+            case "Swordsman":
+                image = ImageProperties.SWORDSMAN_IMAGE;
+                break;
+            case "Overlord":
+                image = ImageProperties.OVERLORD_IMAGE;
+                break;
+            default:
+                image = ImageProperties.DRAGON_IMAGE;
+        }
+        g.drawImage(image, 10, 0, getWidth()-20, getHeight()-20, null);
     }
 
     public void renderChildren() {
     }
 
+    public Unit getUnit(){
+        return this.unit;
+    }
+
+    public void setUnit(final Unit unit){
+        this.unit = unit;
+    }
 }

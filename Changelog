@@ -5,9 +5,9 @@ proper visual location.
 V0.14  11/16/15: Added dynamic grid size and fitted unit image size. Refactored Singletons.
 V0.15  11/16/15: Added new panel to represent the map BG, added simple menu
 V0.15b 11/16/15: Added Players, Turns, GameState. Moved UI logic to GamePanel, game Logic to GameState
+V0.16  11/17/15: Fixed the UnitPanels. Added code to hide or show units. Fixed some bugs.
 
 Bugs:
-0. Resizing the screen causes the GRID to disappear (behind the MAP)
 1. LayeredPane & Layers apparently do nothing, it all depends on what is called first. How do we actually stack
 things correctly?
 
@@ -16,9 +16,8 @@ In Progress:
 
 Todos:
 0. SWING OBJECT MODEL: Figure out if the swing object model is actually best practice
-1. UNITPANEL: Fix unitPanel so it actually represents a Unit. Currently the Unit image is Hardcoded into LocationPanel.
-UnitPanels problem: Either it shows the image and isnt transparent, or it doens't show at all.
-2. REDRAW: Figure out how to redraw units in different LOCATIONPANELS so they can move.
+1. TRIVIAL: Add a ComponentListener class and pull it out of GAMEPANEL. Currently the GAMEPANEL is its own
+componentListener.
 3. MENU: Update the menu with relevant information: Current turn, health of unit, stats of unit, TIME, HasMoved,
 HasAttacked.
 4. SELECTING LOCATIONS: when a location is selected, and RETURN is entered, it needs to show a different colored

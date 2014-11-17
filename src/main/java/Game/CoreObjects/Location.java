@@ -7,7 +7,7 @@ import Game.Units.Unit;
  */
 public abstract class Location extends GameObject {
     private final Coordinate coord;
-    private Unit occupyingUnit;
+    private Unit unit;
 
     protected Location(Coordinate coord) {
         this.coord = coord;
@@ -17,23 +17,23 @@ public abstract class Location extends GameObject {
         return this.coord;
     }
 
-    public boolean hasOccupyingUnit() {
-        return occupyingUnit != null;
+    public boolean hasUnit() {
+        return this.unit != null;
     }
 
-    public Unit getOccupyingUnit() {
-        return this.occupyingUnit;
+    public Unit getUnit() {
+        return this.unit;
     }
 
-    public void setOccupyingUnit(final Unit occupyingUnit) {
-        this.occupyingUnit = occupyingUnit;
+    public void setUnit(final Unit unit) {
+        this.unit = unit;
     }
 
     public boolean addUnit(final Unit unit) {
-        if (this.occupyingUnit != null) {
+        if (this.unit != null) {
             return false;
         }
-        this.occupyingUnit = unit;
+        this.unit = unit;
         unit.setLocation(this);
         return true;
     }

@@ -14,6 +14,7 @@ import java.awt.*;
 public class LocationPanel extends JPanel {
 
     private Location location;
+    private UnitPanel unit;
 
     public LocationPanel() {
         super();
@@ -23,9 +24,12 @@ public class LocationPanel extends JPanel {
     public LocationPanel(final Location location) {
         super();
         this.location = location;
+        this.setLayout(null);
         this.setBounds(0, 0, ImageProperties.LOC_WIDTH, ImageProperties.LOC_HEIGHT);
         //load an image into the layeredPane at {x,y}
         final Coordinate coords = location.getCoords();
+
+        //todo: this doesnt show anymore after I put the unitPanel in
         final JLabel label = new JLabel("{" + coords.getX() + "," + coords.getY() + "}");
         this.add(label);
     }
@@ -44,40 +48,16 @@ public class LocationPanel extends JPanel {
         }
 
         g.drawImage(ImageProperties.LOCATION_BG, 0, 0, getWidth(), getHeight(), null);
-
-        // hard code the children into the Locationpanel,
-        // because I can't get it to work in the UnitPanel
-        final Unit unit = this.location.getOccupyingUnit();
-        if (unit != null) {
-            final String unitName = unit.getClass().getSimpleName();
-            final int locationOffset = 10; //character offset
-            final Image image;
-            if (unitName.equals("Swordsman")) {
-                image = ImageProperties.SWORDSMAN_IMAGE;
-            } else if (unitName.equals("Overlord")) {
-                image = ImageProperties.OVERLORD_IMAGE;
-            } else {
-                image = ImageProperties.DRAGON_IMAGE;
-            }
-            g.drawImage(image,
-                    locationOffset,
-                    locationOffset,
-                    getWidth() - 2 * locationOffset,
-                    getHeight() - 2 * locationOffset,
-                    null);
-        }
     }
 
     public void renderChildren() {
-        if (this.location != null) {
-            //make sure location exists
+        if (this.location != null && this.location.getUnit() != null) {
+            final Unit unit = this.location.getUnit();
+            final UnitPanel unitPanel = new UnitPanel(unit);
+            this.add(unitPanel);
+            this.unit = unitPanel;
+            unitPanel.renderChildren();
         }
-        //dont do this for now since ive hardcoded it above
-//        for (final GameObject child : location.getChildren()) {
-//            final UnitPanel unitPanel = new UnitPanel((Unit) child);
-//            this.add(unitPanel);
-//            unitPanel.renderChildren();
-//        }
     }
 
     public boolean isEmptyLocation() {

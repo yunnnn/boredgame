@@ -10,11 +10,13 @@ import Game.UI.Utils.Layer;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 /**
  * Created by yun on 11/9/14.
  */
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ComponentListener {
 
     private static GamePanel GAMEPANEL; //Singleton
     private GridPanel gridPanel;
@@ -48,8 +50,34 @@ public class GamePanel extends JPanel {
         gamePanel.layeredPane = layeredPane;
         gamePanel.add(layeredPane);
 
+        gamePanel.addComponentListener(gamePanel);
+
         f.add(gamePanel);
         f.addKeyListener(new KeyboardListener()); //gamePanel is both a listener
+    }
+
+    @Override
+    public void componentResized(final ComponentEvent e) {
+        if (GAMEPANEL.get().getGridPanel() != null && GAMEPANEL.get().getGridPanel().getLocationPanels() != null) {
+            for (final LocationPanel lp : GamePanel.get().getGridPanel().getLocationPanels()) {
+                lp.repaint();
+            }
+        }
+    }
+
+    @Override
+    public void componentMoved(final ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(final ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentHidden(final ComponentEvent e) {
+
     }
 
     @Override
@@ -77,6 +105,10 @@ public class GamePanel extends JPanel {
     public void setPlayerTurn(final String player) {
         //set the turn on the ui
 
+    }
+
+    public GridPanel getGridPanel() {
+        return this.gridPanel;
     }
 
     public LocationPanel getLocationPanel(final Coordinate coords) {
