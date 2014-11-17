@@ -68,11 +68,12 @@ public class KeyboardListener implements KeyListener {
     }
 
     private void processSubmit() {
+        //todo: do something here
         return;
     }
 
     //create a border around the panel to indicate that it is highlighted
-    public void highlight(final LocationPanel jPanel) {
+    public static void highlight(final LocationPanel jPanel) {
         if (jPanel != null) {
             unHighlight();
             jPanel.setBorder(HIGHLIGHTED_BORDER);
@@ -81,16 +82,15 @@ public class KeyboardListener implements KeyListener {
     }
 
     //unhighlight the previous location by removing the border
-    private void unHighlight() {
+    private static void unHighlight() {
         if (GameState.get().getCurrentLocationFocus() != null) {
-            GameState.get().setCurrentLocationBorder(EMPTY_BORDER);
+            GamePanel.get().setCurrentLocationBorder(EMPTY_BORDER);
         }
     }
 
     private LocationPanel getAdjacent(final Direction direction) {
         final Coordinate coords = GameState.get().getCurrentLocationFocus();
         final Coordinate adjacentCoords = Coordinate.getAdjacent(coords, direction);
-        return GamePanel.getLocationPanel(adjacentCoords);
+        return GamePanel.get().getLocationPanel(adjacentCoords);
     }
-
 }

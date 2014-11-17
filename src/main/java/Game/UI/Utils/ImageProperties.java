@@ -1,6 +1,5 @@
 package Game.UI.Utils;
 
-import Game.BoredGame;
 import Game.ScriptedLevels.Level1;
 
 import javax.imageio.ImageIO;
@@ -12,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by yun on 11/10/14.
  */
-public final class GameImageUtils {
+public final class ImageProperties {
 
     public static final int SCREEN_WIDTH = 1000;
     public static final int SCREEN_HEIGHT = 800;
@@ -24,7 +23,7 @@ public final class GameImageUtils {
     public static final int GRID_WIDTH = MAP_WIDTH - 100;
     public static final int GRID_HEIGHT = MAP_HEIGHT - 100;
     public static final int GRID_OFFSET = 50;
-    public static final int LOC_HEIGHT = (MAP_WIDTH - GRID_OFFSET*2) / Level1.rows;
+    public static final int LOC_HEIGHT = (MAP_WIDTH - GRID_OFFSET * 2) / Level1.rows;
     public static final int LOC_WIDTH = (MAP_WIDTH - GRID_OFFSET * 2) / Level1.cols;
 
     public static final Image MAP_IMAGE = scaleRead("images/lightbg.jpg", MAP_WIDTH, MAP_HEIGHT);

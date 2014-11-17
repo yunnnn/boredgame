@@ -2,11 +2,13 @@ package Game.UI;
 
 import Game.CoreObjects.Coordinate;
 import Game.CoreObjects.LevelMap;
-import Game.UI.Utils.GameImageUtils;
+import Game.GameState.GameState;
+import Game.UI.Utils.ImageProperties;
 import Game.UI.Utils.KeyboardListener;
 import Game.UI.Utils.Layer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -14,26 +16,20 @@ import java.awt.*;
  */
 public class GamePanel extends JPanel {
 
+    private static GamePanel GAMEPANEL; //Singleton
     private GridPanel gridPanel;
     private JLayeredPane layeredPane;
+    private MenuPanel menuPanel;
 
-    private static GamePanel GAMEPANEL; //Singleton
+    private GamePanel() {
+        super();
+    }
 
     public static GamePanel get() {
         if (GAMEPANEL == null) {
             GAMEPANEL = new GamePanel();
         }
         return GAMEPANEL;
-    }
-
-    private GamePanel() {
-        super();
-    }
-
-    @Override
-    protected void paintComponent(final Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(GameImageUtils.BG_IMAGE, 0, 0, getWidth(), getHeight(), null);
     }
 
     //Create the main JFrame, and attach the GamePanel to it.
@@ -52,29 +48,22 @@ public class GamePanel extends JPanel {
         gamePanel.layeredPane = layeredPane;
         gamePanel.add(layeredPane);
 
-        //Load the static BG and Menu
-        gamePanel.loadMenu();
-
         f.add(gamePanel);
         f.addKeyListener(new KeyboardListener()); //gamePanel is both a listener
     }
 
-    //load an image into the layeredPane
-    public void loadMenu() {
-        JPanel menu = new JPanel(new BorderLayout());
-        menu.setBounds(
-                GameImageUtils.MAP_WIDTH + GameImageUtils.MAP_XOFFSET + 20,
-                GameImageUtils.MAP_YOFFSET,
-                180,
-                GameImageUtils.MAP_HEIGHT);
-
-        menu.add(new JButton("ff"));
-        menu.add(new JLabel("Attack"));
-        menu.add(new JLabel("Menu goes here"));
-        this.layeredPane.add(menu, Layer.BUFFS.getValue());
+    @Override
+    protected void paintComponent(final Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(ImageProperties.BG_IMAGE, 0, 0, getWidth(), getHeight(), null);
     }
 
     public void renderChildren(final LevelMap map) {
+        final MenuPanel menuPanel = new MenuPanel();
+        this.menuPanel = menuPanel;
+        this.layeredPane.add(menuPanel, Layer.BUFFS.getValue());
+        
+
         //todo: must load this first, not sure why resizing the screen makes this on top
         final MapPanel mapPanel = new MapPanel();
         this.layeredPane.add(mapPanel, Layer.MAP.getValue());
@@ -85,11 +74,17 @@ public class GamePanel extends JPanel {
         this.layeredPane.add(gridPanel, Layer.GRID.getValue());
     }
 
-    public GridPanel getGridPanel() {
-        return this.gridPanel;
+    public void setPlayerTurn(final String player) {
+        //set the turn on the ui
+
     }
 
-    public static LocationPanel getLocationPanel(final Coordinate coords) {
-        return GamePanel.get().getGridPanel().getLocationPanel(coords);
+    public LocationPanel getLocationPanel(final Coordinate coords) {
+        return this.gridPanel.getLocationPanel(coords);
+    }
+
+    public void setCurrentLocationBorder(final Border border) {
+        final Coordinate currentLocation = GameState.get().getCurrentLocationFocus();
+        getLocationPanel(currentLocation).setBorder(border);
     }
 }

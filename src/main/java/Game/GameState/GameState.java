@@ -1,8 +1,10 @@
 package Game.GameState;
 
 import Game.CoreObjects.Coordinate;
+import Game.CoreObjects.Player;
 import Game.UI.GamePanel;
 import Game.UI.LocationPanel;
+import Game.Units.Unit;
 
 import javax.swing.border.Border;
 
@@ -11,18 +13,23 @@ import javax.swing.border.Border;
  */
 public class GameState {
 
+    private static GameState GAMESTATE; //Singleton
+    private Player p1;
+    private Player p2;
+    private Player activePlayer;
     private Coordinate currentLocationFocus;
 
-    private static GameState GAMESTATE; //Singleton
+    private GameState() {
+        this.p1 = new Player("Yun");
+        this.p2 = new Player("Lobster");
+        this.activePlayer = p1;
+    }
 
     public static GameState get() {
         if (GAMESTATE == null) {
             GAMESTATE = new GameState();
         }
         return GAMESTATE;
-    }
-
-    private GameState() {
     }
 
     public Coordinate getCurrentLocationFocus() {
@@ -33,12 +40,31 @@ public class GameState {
         this.currentLocationFocus = currentLocation;
     }
 
-    public void setCurrentLocationBorder(final Border border) {
-        getCurrentLocationPanel().setBorder(border);
+    public Player getActivePlayer() {
+        return this.activePlayer;
     }
 
-    private LocationPanel getCurrentLocationPanel() {
-        return GamePanel.getLocationPanel(this.currentLocationFocus);
+    public void switchTurns() {
+        if (this.activePlayer == this.p1) {
+            this.activePlayer = this.p2;
+        } else {
+            this.activePlayer = this.p1;
+        }
     }
 
+    public void startTurn() {
+        System.out.println(this.activePlayer.toString() + "'s turn");
+        GamePanel.get().setPlayerTurn(this.activePlayer.toString());
+
+        if (!this.activePlayer.hasOwnedUnits()) {
+
+            //gameover
+        } else {
+            final Unit firstUnit = this.activePlayer.getOwnedUnits().get(0);
+
+            //setFocus
+        }
+
+        switchTurns();
+    }
 }

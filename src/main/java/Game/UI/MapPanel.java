@@ -1,6 +1,6 @@
 package Game.UI;
 
-import Game.UI.Utils.GameImageUtils;
+import Game.UI.Utils.ImageProperties;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,15 +13,15 @@ public class MapPanel extends JPanel {
     public MapPanel() {
         super();
         this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4));
-        this.setBounds(GameImageUtils.MAP_XOFFSET,
-                GameImageUtils.MAP_YOFFSET,
-                GameImageUtils.MAP_WIDTH,
-                GameImageUtils.MAP_HEIGHT);
+        this.setBounds(ImageProperties.MAP_XOFFSET,
+                ImageProperties.MAP_YOFFSET,
+                ImageProperties.MAP_WIDTH,
+                ImageProperties.MAP_HEIGHT);
     }
 
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
-        g.drawImage(GameImageUtils.MAP_IMAGE, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(ImageProperties.MAP_IMAGE, 0, 0, getWidth(), getHeight(), null);
     }
 }

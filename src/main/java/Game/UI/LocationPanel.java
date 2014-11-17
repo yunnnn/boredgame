@@ -2,8 +2,7 @@ package Game.UI;
 
 import Game.CoreObjects.Coordinate;
 import Game.CoreObjects.Location;
-import Game.ScriptedLevels.Level1;
-import Game.UI.Utils.GameImageUtils;
+import Game.UI.Utils.ImageProperties;
 import Game.Units.Unit;
 
 import javax.swing.*;
@@ -16,14 +15,15 @@ public class LocationPanel extends JPanel {
 
     private Location location;
 
-    public LocationPanel(){
+    public LocationPanel() {
         super();
-        this.setBounds(0, 0, GameImageUtils.LOC_WIDTH, GameImageUtils.LOC_HEIGHT);
+        this.setBounds(0, 0, ImageProperties.LOC_WIDTH, ImageProperties.LOC_HEIGHT);
     }
 
     public LocationPanel(final Location location) {
         super();
-        this.location = location;this.setBounds(0, 0, GameImageUtils.LOC_WIDTH, GameImageUtils.LOC_HEIGHT);
+        this.location = location;
+        this.setBounds(0, 0, ImageProperties.LOC_WIDTH, ImageProperties.LOC_HEIGHT);
         //load an image into the layeredPane at {x,y}
         final Coordinate coords = location.getCoords();
         final JLabel label = new JLabel("{" + coords.getX() + "," + coords.getY() + "}");
@@ -38,12 +38,12 @@ public class LocationPanel extends JPanel {
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        if (this.location == null){
-            g.drawImage(GameImageUtils.NO_LOCATION_BG, 0, 0, getWidth(), getHeight(), null);
+        if (this.location == null) {
+            g.drawImage(ImageProperties.NO_LOCATION_BG, 0, 0, getWidth(), getHeight(), null);
             return;
         }
 
-        g.drawImage(GameImageUtils.LOCATION_BG, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(ImageProperties.LOCATION_BG, 0, 0, getWidth(), getHeight(), null);
 
         // hard code the children into the Locationpanel,
         // because I can't get it to work in the UnitPanel
@@ -53,11 +53,11 @@ public class LocationPanel extends JPanel {
             final int locationOffset = 10; //character offset
             final Image image;
             if (unitName.equals("Swordsman")) {
-                image = GameImageUtils.SWORDSMAN_IMAGE;
+                image = ImageProperties.SWORDSMAN_IMAGE;
             } else if (unitName.equals("Overlord")) {
-                image = GameImageUtils.OVERLORD_IMAGE;
+                image = ImageProperties.OVERLORD_IMAGE;
             } else {
-                image = GameImageUtils.DRAGON_IMAGE;
+                image = ImageProperties.DRAGON_IMAGE;
             }
             g.drawImage(image,
                     locationOffset,
@@ -69,7 +69,7 @@ public class LocationPanel extends JPanel {
     }
 
     public void renderChildren() {
-        if (this.location != null){
+        if (this.location != null) {
             //make sure location exists
         }
         //dont do this for now since ive hardcoded it above

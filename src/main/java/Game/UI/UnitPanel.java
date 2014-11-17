@@ -1,6 +1,6 @@
 package Game.UI;
 
-import Game.UI.Utils.GameImageUtils;
+import Game.UI.Utils.ImageProperties;
 import Game.Units.Unit;
 
 import javax.swing.*;
@@ -40,11 +40,11 @@ public class UnitPanel extends JPanel {
         final int locationOffset = 12; //character offset
         Image image = null;
         if (unitName.equals("Swordsman")) {
-            image = GameImageUtils.SWORDSMAN_IMAGE;
+            image = ImageProperties.SWORDSMAN_IMAGE;
         } else if (unitName.equals("Overlord")) {
-            image = GameImageUtils.OVERLORD_IMAGE;
+            image = ImageProperties.OVERLORD_IMAGE;
         } else {
-            image = GameImageUtils.DRAGON_IMAGE;
+            image = ImageProperties.DRAGON_IMAGE;
         }
         g.drawImage(image, locationOffset, locationOffset, null);
     }

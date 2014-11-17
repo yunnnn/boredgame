@@ -6,8 +6,8 @@ import Game.Units.Unit;
  * Created by yun on 11/8/14.
  */
 public abstract class Location extends GameObject {
-    private Unit occupyingUnit;
     private final Coordinate coord;
+    private Unit occupyingUnit;
 
     protected Location(Coordinate coord) {
         this.coord = coord;

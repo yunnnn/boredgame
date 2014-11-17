@@ -13,14 +13,6 @@ public class Coordinate {
         this.y = y;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public static Coordinate getAdjacent(final Coordinate coords, final Direction direction) {
         int x = coords.getX();
         int y = coords.getY();
@@ -39,5 +31,13 @@ public class Coordinate {
                 break;
         }
         return new Coordinate(x, y);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

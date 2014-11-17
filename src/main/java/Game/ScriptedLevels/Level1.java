@@ -13,16 +13,15 @@ import Game.Units.Swordsman;
  */
 public class Level1 {
 
-    public static LevelMap MAP;//for debugging
+    public static final int rows = 5;
 
     // y1 x x x x x
     // y2 x x x x x
     // y3 x x x x x
     // y4 x x x x x
     // y5 x x x x x (6, 5)
-
-    public static final int rows = 5;
     public static final int cols = 6;
+    public static LevelMap MAP;//for debugging
 
     public static LevelMap init() {
         final Location[][] locations = new Location[cols][rows];

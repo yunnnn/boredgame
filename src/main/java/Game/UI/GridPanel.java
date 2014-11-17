@@ -5,7 +5,7 @@ import Game.CoreObjects.GameObject;
 import Game.CoreObjects.LevelMap;
 import Game.CoreObjects.Location;
 import Game.ScriptedLevels.Level1;
-import Game.UI.Utils.GameImageUtils;
+import Game.UI.Utils.ImageProperties;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,10 +25,10 @@ public final class GridPanel extends JPanel {
         super();
         this.map = map;
 
-        this.setBounds(GameImageUtils.MAP_XOFFSET + GameImageUtils.GRID_OFFSET,
-                GameImageUtils.MAP_YOFFSET + GameImageUtils.GRID_OFFSET,
-                GameImageUtils.GRID_WIDTH,
-                GameImageUtils.GRID_HEIGHT);
+        this.setBounds(ImageProperties.MAP_XOFFSET + ImageProperties.GRID_OFFSET,
+                ImageProperties.MAP_YOFFSET + ImageProperties.GRID_OFFSET,
+                ImageProperties.GRID_WIDTH,
+                ImageProperties.GRID_HEIGHT);
         this.gridLayout = new GridLayout(Level1.rows, Level1.cols, 0, 0);
         this.setLayout(this.gridLayout);
     }

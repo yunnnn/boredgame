@@ -1,20 +1,36 @@
-V0.1  11/10/15: Switched to Jpanels, have basic BG/Map/Location/Unit showing.
-V0.2  11/10/15: Switched to nested Panels, allowing keyboard listener and highlighting to work.
-V0.3  11/15/15: Added highlighting of locations and grid movement. Flipped the location rendering so locations in
+V0.11  11/10/15: Switched to Jpanels, have basic BG/Map/Location/Unit showing.
+V0.12  11/10/15: Switched to nested Panels, allowing keyboard listener and highlighting to work.
+V0.13  11/15/15: Added highlighting of locations and grid movement. Flipped the location rendering so locations in
 proper visual location.
-V0.4  11/16/15: Added dynamic grid size and fitted unit image size. Refactored Singletons.
-V0.5  11/16/15: Added new panel to represent the map BG, added simple menu
+V0.14  11/16/15: Added dynamic grid size and fitted unit image size. Refactored Singletons.
+V0.15  11/16/15: Added new panel to represent the map BG, added simple menu
+V0.15b 11/16/15: Added Players, Turns, GameState. Moved UI logic to GamePanel, game Logic to GameState
 
 Bugs:
-Resizing the screen causes the GRID to disappear (behind the MAP)
-Layers apparently do nothing, it all depends on what is called first
+0. Resizing the screen causes the GRID to disappear (behind the MAP)
+1. LayeredPane & Layers apparently do nothing, it all depends on what is called first. How do we actually stack
+things correctly?
+
+In Progress:
+0. Get UML diagrammer tool and map out the GameObject tree, the UIPanel tree, and the Cross interaction tree.
 
 Todos:
-The unitPanel code doesn't seem to work. either it shows and isnt transparent, or doesn't show at all.
-Right now I have the Game.Units coded into the Location.
+0. SWING OBJECT MODEL: Figure out if the swing object model is actually best practice
+1. UNITPANEL: Fix unitPanel so it actually represents a Unit. Currently the Unit image is Hardcoded into LocationPanel.
+UnitPanels problem: Either it shows the image and isnt transparent, or it doens't show at all.
+2. REDRAW: Figure out how to redraw units so they can move.
+3. MENU: Update the menu with relevant information.
+4. SELECTING LOCATIONS: when a location is selected, and RETURN is entered, it needs to show a different colored
+border indicating that it is selected.
+4.1. SELECTING LOCATIONS wrt CURRENT LOCATION CONTEXT: These are both represented by a pixel Border. However, you can't
+have 2 borders, so there's no way to show both at the same time. Figure out how to show both at the same time.
+5. POSSIBLE MOVEMENT UIs: If a Location is selected with a Unit inside, show the possible range of movement in the UI.
+Assume the unit can move 2 squares. Highlight the range somehow. Again, this can't collide with 4.1 either.
+6. RULES ENGINE that governs POSSIBLE MOVEMENT. Units should not be able to move to squares that already have units,
+but they can move around them (so the PossMovement area can be a nonDiamond).
 
 
-Add action - response loop to move units
+
 
 
 

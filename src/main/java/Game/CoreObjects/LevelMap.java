@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class LevelMap extends GameObject {
 
-    final private List<Unit> units = new ArrayList();
     final GridMap gridMap;
+    final private List<Unit> units = new ArrayList();
 
     public LevelMap(final GridMap gridMap) {
         this.gridMap = gridMap;
