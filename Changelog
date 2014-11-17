@@ -1,20 +1,53 @@
-V0.1 11/10/15: Switched to Jpanels, have basic BG/Map/Location/Unit showing.
-V0.2 11/10/15: Switched to nested Panels, allowing keyboard listener and highlighting to work.
+V0.1  11/10/15: Switched to Jpanels, have basic BG/Map/Location/Unit showing.
+V0.2  11/10/15: Switched to nested Panels, allowing keyboard listener and highlighting to work.
+V0.3  11/15/15: Added highlighting of locations and grid movement. Flipped the location rendering so locations in
+proper visual location.
+V0.4  11/16/15: Added dynamic grid size and fitted unit image size. Refactored Singletons.
+V0.5  11/16/15: Added new panel to represent the map BG, added simple menu
 
-
+Bugs:
+Resizing the screen causes the GRID to disappear (behind the MAP)
+Layers apparently do nothing, it all depends on what is called first
 
 Todos:
 The unitPanel code doesn't seem to work. either it shows and isnt transparent, or doesn't show at all.
-Right now I have the Units coded into the Location.
+Right now I have the Game.Units coded into the Location.
 
-Add keyboard listener
-Add highlighting to cells
+
 Add action - response loop to move units
 
 
 
 
-oldcrap:
+Old crap:
+
+
+    //logging
+    public void logLoad(final String imageName,
+                        final int x,
+                        final int y,
+                        final Dimension size,
+                        final Integer depth) {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Image: " + imageName + ", ");
+        sb.append("At {" + x + "," + y + "}, ");
+        sb.append("Width:" + size.getWidth() + " Height:" + size.getHeight() + " ");
+        sb.append("Depth: " + depth + ". ");
+        System.out.println(sb.toString());
+    }
+
+    //load an image into the layeredPane at {x,y}
+    public void loadImage(final ImageIcon image,
+                          final Integer depth,
+                          final int x,
+                          final int y) {
+        final JLabel imageContainer = new JLabel(image);
+        final Dimension size = imageContainer.getPreferredSize();
+        imageContainer.setBounds(x, y, size.width, size.height);
+        logLoad(image.getDescription(), x, y, size, depth);
+        this.layeredPane.add(imageContainer, depth);
+    }
+
 
 public static void load() {
 
