@@ -18,8 +18,9 @@ Todos:
 0. SWING OBJECT MODEL: Figure out if the swing object model is actually best practice
 1. UNITPANEL: Fix unitPanel so it actually represents a Unit. Currently the Unit image is Hardcoded into LocationPanel.
 UnitPanels problem: Either it shows the image and isnt transparent, or it doens't show at all.
-2. REDRAW: Figure out how to redraw units so they can move.
-3. MENU: Update the menu with relevant information.
+2. REDRAW: Figure out how to redraw units in different LOCATIONPANELS so they can move.
+3. MENU: Update the menu with relevant information: Current turn, health of unit, stats of unit, TIME, HasMoved,
+HasAttacked.
 4. SELECTING LOCATIONS: when a location is selected, and RETURN is entered, it needs to show a different colored
 border indicating that it is selected.
 4.1. SELECTING LOCATIONS wrt CURRENT LOCATION CONTEXT: These are both represented by a pixel Border. However, you can't
@@ -28,7 +29,8 @@ have 2 borders, so there's no way to show both at the same time. Figure out how 
 Assume the unit can move 2 squares. Highlight the range somehow. Again, this can't collide with 4.1 either.
 6. RULES ENGINE that governs POSSIBLE MOVEMENT. Units should not be able to move to squares that already have units,
 but they can move around them (so the PossMovement area can be a nonDiamond).
-
+7. TURN STRUCTURE: Units can move and attack once per turn. Need to have state to represent the waiting for these
+actions.
 
 
 
