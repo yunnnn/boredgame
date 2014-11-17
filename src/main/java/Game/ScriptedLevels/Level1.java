@@ -1,12 +1,12 @@
-package ScriptedLevels;
+package Game.ScriptedLevels;
 
-import CoreObjects.Coordinate;
-import CoreObjects.GridMap;
-import CoreObjects.LevelMap;
-import CoreObjects.Location;
-import CoreObjects.SquareTile;
-import Units.Overlord;
-import Units.Swordsman;
+import Game.CoreObjects.Coordinate;
+import Game.CoreObjects.GridMap;
+import Game.CoreObjects.LevelMap;
+import Game.CoreObjects.Location;
+import Game.CoreObjects.SquareTile;
+import Game.Units.Overlord;
+import Game.Units.Swordsman;
 
 /**
  * Created by yun on 11/8/14.
@@ -14,7 +14,6 @@ import Units.Swordsman;
 public class Level1 {
 
     public static LevelMap MAP;//for debugging
-
 
     // y1 x x x x x
     // y2 x x x x x

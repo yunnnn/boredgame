@@ -1,6 +1,6 @@
-package CoreObjects;
+package Game.CoreObjects;
 
-import Units.Unit;
+import Game.Units.Unit;
 
 /**
  * Created by yun on 11/8/14.

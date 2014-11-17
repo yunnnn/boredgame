@@ -1,4 +1,4 @@
-package CoreObjects;
+package Game.CoreObjects;
 
 /**
  * Created by yun on 11/9/14.
@@ -24,7 +24,7 @@ public class Coordinate {
     public static Coordinate getAdjacent(final Coordinate coords, final Direction direction) {
         int x = coords.getX();
         int y = coords.getY();
-        switch (direction){
+        switch (direction) {
             case UP:
                 y -= 1;
                 break;

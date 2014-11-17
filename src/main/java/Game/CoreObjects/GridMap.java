@@ -1,4 +1,4 @@
-package CoreObjects;
+package Game.CoreObjects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +24,9 @@ public class GridMap {
         //System.out.println("New Cols: " + columns);
         //System.out.println("New Rows: " + rows);
         final Location[][] flippedLocations = new Location[columns][rows];
-        for(int i = 0; i < columns; i++){
-            for(int j = 0; j < rows; j++){
-                if (locations[j][i] != null){
+        for (int i = 0; i < columns; i++) {
+            for (int j = 0; j < rows; j++) {
+                if (locations[j][i] != null) {
                     flippedLocations[i][j] = locations[j][i];
                 }
             }

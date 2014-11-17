@@ -1,10 +1,7 @@
-package Units;
+package Game.Units;
 
-import CoreObjects.GameObject;
-import CoreObjects.Location;
-
-import java.util.Collections;
-import java.util.List;
+import Game.CoreObjects.GameObject;
+import Game.CoreObjects.Location;
 
 /**
  * Created by yun on 11/8/14.
@@ -24,6 +21,7 @@ public class Unit extends GameObject {
     public Location getLocation() {
         return this.location;
     }
+
     public void setLocation(final Location location) {
         this.location = location;
     }

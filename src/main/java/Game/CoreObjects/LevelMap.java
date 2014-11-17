@@ -1,6 +1,6 @@
-package CoreObjects;
+package Game.CoreObjects;
 
-import Units.Unit;
+import Game.Units.Unit;
 
 import java.util.ArrayList;
 import java.util.List;

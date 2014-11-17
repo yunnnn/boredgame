@@ -1,4 +1,4 @@
-package CoreObjects;
+package Game.CoreObjects;
 
 import java.util.Random;
 

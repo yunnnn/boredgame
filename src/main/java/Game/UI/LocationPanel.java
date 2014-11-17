@@ -1,9 +1,10 @@
-package UI;
+package Game.UI;
 
-import CoreObjects.Coordinate;
-import CoreObjects.Location;
-import UI.Utils.GameImageUtils;
-import Units.Unit;
+import Game.CoreObjects.Coordinate;
+import Game.CoreObjects.Location;
+import Game.ScriptedLevels.Level1;
+import Game.UI.Utils.GameImageUtils;
+import Game.Units.Unit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,29 +14,36 @@ import java.awt.*;
  */
 public class LocationPanel extends JPanel {
 
-    final Location location;
+    private Location location;
+
+    public LocationPanel(){
+        super();
+        this.setBounds(0, 0, GameImageUtils.LOC_WIDTH, GameImageUtils.LOC_HEIGHT);
+    }
 
     public LocationPanel(final Location location) {
         super();
-        this.location = location;
+        this.location = location;this.setBounds(0, 0, GameImageUtils.LOC_WIDTH, GameImageUtils.LOC_HEIGHT);
         //load an image into the layeredPane at {x,y}
         final Coordinate coords = location.getCoords();
         final JLabel label = new JLabel("{" + coords.getX() + "," + coords.getY() + "}");
         this.add(label);
     }
 
-    public Location getLoc(){
-        return this.location;
-    }
-
-    public Coordinate getCoords(){
-        return this.location.getCoords();
+    public Coordinate getCoords() {
+        return this.location == null ? null : this.location.getCoords();
     }
 
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
-        g.drawImage(GameImageUtils.LOCATION_IMAGE, 0, 0, null);
+
+        if (this.location == null){
+            g.drawImage(GameImageUtils.NO_LOCATION_BG, 0, 0, getWidth(), getHeight(), null);
+            return;
+        }
+
+        g.drawImage(GameImageUtils.LOCATION_BG, 0, 0, getWidth(), getHeight(), null);
 
         // hard code the children into the Locationpanel,
         // because I can't get it to work in the UnitPanel
@@ -51,18 +59,28 @@ public class LocationPanel extends JPanel {
             } else {
                 image = GameImageUtils.DRAGON_IMAGE;
             }
-            int w = this.getWidth();
-            int h = this.getHeight();
-            g.drawImage(image, locationOffset, locationOffset, w-2*locationOffset, h-2*locationOffset, null);
+            g.drawImage(image,
+                    locationOffset,
+                    locationOffset,
+                    getWidth() - 2 * locationOffset,
+                    getHeight() - 2 * locationOffset,
+                    null);
         }
     }
 
     public void renderChildren() {
+        if (this.location != null){
+            //make sure location exists
+        }
         //dont do this for now since ive hardcoded it above
 //        for (final GameObject child : location.getChildren()) {
 //            final UnitPanel unitPanel = new UnitPanel((Unit) child);
 //            this.add(unitPanel);
 //            unitPanel.renderChildren();
 //        }
+    }
+
+    public boolean isEmptyLocation() {
+        return this.location == null;
     }
 }

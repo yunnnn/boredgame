@@ -1,8 +1,8 @@
-package GameState;
+package Game.GameState;
 
-import CoreObjects.Coordinate;
-import UI.GamePanel;
-import UI.LocationPanel;
+import Game.CoreObjects.Coordinate;
+import Game.UI.GamePanel;
+import Game.UI.LocationPanel;
 
 import javax.swing.border.Border;
 
@@ -14,13 +14,15 @@ public class GameState {
     private Coordinate currentLocationFocus;
 
     private static GameState GAMESTATE; //Singleton
+
     public static GameState get() {
         if (GAMESTATE == null) {
             GAMESTATE = new GameState();
         }
         return GAMESTATE;
     }
-    private GameState(){
+
+    private GameState() {
     }
 
     public Coordinate getCurrentLocationFocus() {
@@ -35,8 +37,8 @@ public class GameState {
         getCurrentLocationPanel().setBorder(border);
     }
 
-    private LocationPanel getCurrentLocationPanel(){
-        return GamePanel.get().getMapPanel().getLocationPanel(currentLocationFocus);
+    private LocationPanel getCurrentLocationPanel() {
+        return GamePanel.getLocationPanel(this.currentLocationFocus);
     }
 
 }

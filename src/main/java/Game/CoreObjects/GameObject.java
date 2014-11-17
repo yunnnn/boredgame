@@ -1,6 +1,4 @@
-package CoreObjects;
-
-import java.util.List;
+package Game.CoreObjects;
 
 /**
  * Created by yun on 11/8/14.

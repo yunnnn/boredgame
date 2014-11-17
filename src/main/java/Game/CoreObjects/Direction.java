@@ -1,4 +1,4 @@
-package CoreObjects;
+package Game.CoreObjects;
 
 /**
  * Created by yun on 11/10/14.

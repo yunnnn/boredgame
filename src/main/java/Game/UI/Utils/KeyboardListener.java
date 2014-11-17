@@ -1,10 +1,10 @@
-package UI.Utils;
+package Game.UI.Utils;
 
-import CoreObjects.Coordinate;
-import CoreObjects.Direction;
-import GameState.GameState;
-import UI.GamePanel;
-import UI.LocationPanel;
+import Game.CoreObjects.Coordinate;
+import Game.CoreObjects.Direction;
+import Game.GameState.GameState;
+import Game.UI.GamePanel;
+import Game.UI.LocationPanel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,12 +16,12 @@ import java.awt.event.KeyListener;
 /**
  * Created by yun on 11/15/14.
  */
-public class KeyboardListener implements KeyListener{
+public class KeyboardListener implements KeyListener {
 
     private static final EmptyBorder EMPTY_BORDER = (EmptyBorder) BorderFactory.createEmptyBorder();
     private static final Border HIGHLIGHTED_BORDER = BorderFactory.createLineBorder(Color.RED, 2);
 
-    public KeyboardListener(){
+    public KeyboardListener() {
     }
 
     @Override
@@ -37,10 +37,9 @@ public class KeyboardListener implements KeyListener{
     public void keyReleased(final KeyEvent e) {
     }
 
-
     private void processAction(final int keyCode) {
         LocationPanel highlightTarget = null;
-        switch (keyCode){
+        switch (keyCode) {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
                 highlightTarget = getAdjacent(Direction.UP);
@@ -72,7 +71,8 @@ public class KeyboardListener implements KeyListener{
         return;
     }
 
-    private void highlight(final LocationPanel jPanel) {
+    //create a border around the panel to indicate that it is highlighted
+    public void highlight(final LocationPanel jPanel) {
         if (jPanel != null) {
             unHighlight();
             jPanel.setBorder(HIGHLIGHTED_BORDER);
@@ -80,6 +80,7 @@ public class KeyboardListener implements KeyListener{
         }
     }
 
+    //unhighlight the previous location by removing the border
     private void unHighlight() {
         if (GameState.get().getCurrentLocationFocus() != null) {
             GameState.get().setCurrentLocationBorder(EMPTY_BORDER);
@@ -89,7 +90,7 @@ public class KeyboardListener implements KeyListener{
     private LocationPanel getAdjacent(final Direction direction) {
         final Coordinate coords = GameState.get().getCurrentLocationFocus();
         final Coordinate adjacentCoords = Coordinate.getAdjacent(coords, direction);
-        return GamePanel.get().getMapPanel().getLocationPanel(adjacentCoords);
+        return GamePanel.getLocationPanel(adjacentCoords);
     }
 
 }

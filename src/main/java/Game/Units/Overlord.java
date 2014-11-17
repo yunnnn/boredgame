@@ -1,4 +1,4 @@
-package Units;
+package Game.Units;
 
 /**
  * Created by yun on 11/10/14.

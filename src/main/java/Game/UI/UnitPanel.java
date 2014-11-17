@@ -1,7 +1,7 @@
-package UI;
+package Game.UI;
 
-import UI.Utils.GameImageUtils;
-import Units.Unit;
+import Game.UI.Utils.GameImageUtils;
+import Game.Units.Unit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,10 +31,7 @@ public class UnitPanel extends JPanel {
 //        ImageIcon imageIcon = new ImageIcon(image);
 //        final JLabel jLabel = new JLabel(imageIcon);
 
-
-
     }
-
 
     @Override
     protected void paintComponent(final Graphics g) {
